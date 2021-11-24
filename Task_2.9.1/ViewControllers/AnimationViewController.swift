@@ -23,11 +23,15 @@ final class AnimationViewController: UIViewController {
     
     @IBAction func tapRunButton() {
         animatedView.animation = "\(animationSettings.preset)"
+        animatedView.curve = "\(animationSettings.curve)"
+        animatedView.force = animationSettings.force
+        animatedView.duration = animationSettings.duration
+        animatedView.delay = animationSettings.delay
         animatedView.animate()
         
         setLabelsTitles()
         animationSettings = AnimationModel.setAnimationSettings()
-        runButton.setTitle("\(animationSettings.preset)", for: .normal)
+        runButton.setTitle("Run: \(animationSettings.preset)", for: .normal)
     }
     
 }
@@ -37,11 +41,11 @@ private extension AnimationViewController {
     private func setLabelsTitles() {
         for index in 0..<settingsLabels.count {
             switch index {
-                case 0: settingsLabels[index].text = "\(animationSettings.preset)"
-                case 1: settingsLabels[index].text = "\(animationSettings.curve)"
-                case 2: settingsLabels[index].text = "\(String(format: "%.2f", animationSettings.force))"
-                case 3: settingsLabels[index].text = "\(String(format: "%.2f", animationSettings.duration))"
-                default: settingsLabels[index].text = "\(String(format: "%.2f", animationSettings.delay))"
+                case 0: settingsLabels[index].text = "Preset: \(animationSettings.preset)"
+                case 1: settingsLabels[index].text = "Curve: \(animationSettings.curve)"
+                case 2: settingsLabels[index].text = "Force: \(String(format: "%.2f", animationSettings.force))"
+                case 3: settingsLabels[index].text = "Duration: \(String(format: "%.2f", animationSettings.duration))"
+                default: settingsLabels[index].text = "Delay: \(String(format: "%.2f", animationSettings.delay))"
             }
         }
     }
